@@ -20,10 +20,30 @@ public class FollowCam : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (POI == null) return; //return if there is no POI
+        Vector3 destination;
 
-        //Get the position of th POI
-        Vector3 destination = POI.transform.position;
+        //if there is no POI return P:[0, 0, 0]
+        if (POI == null) {
+            destination = Vector3.zero;
+        }
+        else
+        {
+            //Get the position of the POI
+            destination = POI.transform.position;
+
+            //If POI is a projectile, check to see if it's at rest
+            if(POI.tag == "Projectile")
+            {
+                if (POI.GetComponent<Rigidbody>().IsSleeping())
+                {
+                    POI = null;
+                    return;
+                }
+            }
+        }
+
+        //Get the position of the POI
+        
 
         //Limit the X & Y to minimum vales
         destination.x = Mathf.Max(minXY.x, destination.x);
