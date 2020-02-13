@@ -39,6 +39,7 @@ public class FollowCam : MonoBehaviour
         transform.position = destination;
 
         //Set the orthographicSize of the Camera to keep Ground in view
+        //10 is the minimum size regardless of destination's y position
         Camera.main.orthographicSize = destination.y + 10;
     }
     // Start is called before the first frame update
