@@ -99,6 +99,9 @@ public class Slingshot : MonoBehaviour
             projectileRigidBody.isKinematic = false;
             projectileRigidBody.velocity = -mouseDelta * velocityMult;
 
+            //Sets projectile as the POI we want our camera to follow
+            FollowCam.POI = projectile;
+
             //Empties the projectile field so we can fire another
             projectile = null;
         }
