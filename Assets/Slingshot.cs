@@ -9,6 +9,7 @@ public class Slingshot : MonoBehaviour
     //fields set in Unity Inspector pane
     [Header("Set in Inspector")]
     public GameObject prefabProjectile;
+    public float velocityMult = 8f;
 
     //fields set dynamically
     [Header("Set Dynamically")]
@@ -16,6 +17,8 @@ public class Slingshot : MonoBehaviour
     public Vector3 launchPos;
     public GameObject projectile;
     public bool aimingMode;
+
+    private Rigidbody projectileRigidBody;
 
 
     private void Awake()
@@ -49,6 +52,56 @@ public class Slingshot : MonoBehaviour
         projectile.transform.position = launchPos;
 
         //Temporarily set projectile to isKinematic so we can move it around
-        projectile.GetComponent<Rigidbody>().isKinematic = true;
+        //projectile.GetComponent<Rigidbody>().isKinematic = true;
+
+        projectileRigidBody = projectile.GetComponent<Rigidbody>();
+        projectileRigidBody.isKinematic = true;
+    }
+
+    private void Update()
+    {
+        if (!aimingMode)
+        {
+            return;
+        }
+
+        //Get the current mouse position in 2D screen coordinates
+        Vector3 mousePos2D = Input.mousePosition;
+
+        //This informs how far to push mousePos3D in the 3D space using the camera
+        mousePos2D.z = -Camera.main.transform.position.z;
+
+        //Sets the mouse's position in 3D space
+        Vector3 mousePos3D = Camera.main.ScreenToWorldPoint(mousePos2D);
+
+        //Find the delta from the launchPos to the mousePos3D
+        Vector3 mouseDelta = mousePos3D - launchPos;
+
+        //Limit mouseDealta to the radius of the Slingshot SphereCollider
+        float maxMagnitude = this.GetComponent<SphereCollider>().radius;
+        if(mouseDelta.magnitude > maxMagnitude)
+        {
+            mouseDelta.Normalize();
+            mouseDelta *= maxMagnitude;
+        }
+
+        //Move the projectile to this new position
+        //projPos is the result of the launchPos (which is the starting position) plus the difference of where the mouse is
+        Vector3 projPos = launchPos + mouseDelta;
+
+        //This is the part that actually moves it by setting the projectile's position
+        projectile.transform.position = projPos;
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            //The primary mouse button has been released
+            aimingMode = false;
+            projectileRigidBody.isKinematic = false;
+            projectileRigidBody.velocity = -mouseDelta * velocityMult;
+
+            //Empties the projectile field so we can fire another
+            projectile = null;
+        }
+
     }
 }
