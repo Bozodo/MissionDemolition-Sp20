@@ -115,6 +115,8 @@ public class Slingshot : MonoBehaviour
 
             //Empties the projectile field so we can fire another
             projectile = null;
+            MissionDemolition.ShotsFired();
+            ProjectileLine.S.poi = projectile;
         }
 
     }
