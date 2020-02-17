@@ -369,7 +369,7 @@ MonoBehaviour:
   shotsTaken: 0
   castle: {fileID: 0}
   mode: 0
-  showing: "Show\tSlingshot"
+  showing: Show Slingshot
 --- !u!1 &443218444
 GameObject:
   m_ObjectHideFlags: 0

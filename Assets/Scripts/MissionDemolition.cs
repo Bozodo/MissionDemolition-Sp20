@@ -13,12 +13,14 @@ public class MissionDemolition : MonoBehaviour
     }
 
     static private MissionDemolition S; //	a	private	Singleton
+
     [Header("Set in	Inspector")]
     public Text uitLevel; //	The	UIText_Level	Text
     public Text uitShots; //	The	UIText_Shots	Text
     public Text uitButton; //	The	Text	on	UIButton_View
     public Vector3 castlePos; //	The	place	to	put	castles
     public GameObject[] castles; //	An	array	of	the	castles
+
     [Header("Set Dynamically")]
     public int level; //	The	current	level
     public int levelMax; //	The	number	of	levels
@@ -52,7 +54,7 @@ public class MissionDemolition : MonoBehaviour
         castle.transform.position = castlePos;
         shotsTaken = 0;
         //	Reset	the	camera
-        SwitchView("wShow Both");
+        SwitchView("Show Both");
         ProjectileLine.S.Clear();
         //	Reset	the	goal
         Goal.goalMet = false;
@@ -63,7 +65,7 @@ public class MissionDemolition : MonoBehaviour
     void UpdateGUI()
     {
         //	Show	the	data	in	the	GUITexts
-        uitLevel.text = "Level:	" + (level + 1) + " of " + levelMax;
+        uitLevel.text = "Level: " + (level + 1) + " of " + levelMax;
         uitShots.text = "Shots	Taken:	" + shotsTaken;
     }
 
@@ -77,7 +79,7 @@ public class MissionDemolition : MonoBehaviour
             //	Change	mode	to	stop	checking	for	level	end
             mode = GameMode.levelEnd;
             //	Zoom	out
-            SwitchView("Show Slingshot");
+            SwitchView("Show Both");
             //	Start	the	next	level	in	2	seconds
             Invoke("NextLevel", 2f);
         }
@@ -104,15 +106,15 @@ public class MissionDemolition : MonoBehaviour
         {
             case "Show Slingshot":
                 FollowCam.POI = null;
-                uitButton.text = "Show	Castle";
+                uitButton.text = "Show Castle";
                 break;
             case "Show Castle":
                 FollowCam.POI = S.castle;
-                uitButton.text = "Show	Both";
+                uitButton.text = "Show Both";
                 break;
             case "Show Both":
                 FollowCam.POI = GameObject.Find("ViewBoth");
-                uitButton.text = "Show	Slingshot";
+                uitButton.text = "Show Slingshot";
                 break;
         }
     }
