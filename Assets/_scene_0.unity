@@ -579,7 +579,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Show Slingshot
+  m_Text: Button
 --- !u!222 &593638475
 CanvasRenderer:
   m_ObjectHideFlags: 0

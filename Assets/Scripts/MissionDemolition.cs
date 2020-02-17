@@ -63,7 +63,7 @@ public class MissionDemolition : MonoBehaviour
     void UpdateGUI()
     {
         //	Show	the	data	in	the	GUITexts
-        uitLevel.text = "Level:	" + (level + 1) + "of " + levelMax;
+        uitLevel.text = "Level:	" + (level + 1) + " of " + levelMax;
         uitShots.text = "Shots	Taken:	" + shotsTaken;
     }
 
@@ -77,7 +77,7 @@ public class MissionDemolition : MonoBehaviour
             //	Change	mode	to	stop	checking	for	level	end
             mode = GameMode.levelEnd;
             //	Zoom	out
-            SwitchView("Show Both");
+            SwitchView("Show Slingshot");
             //	Start	the	next	level	in	2	seconds
             Invoke("NextLevel", 2f);
         }
