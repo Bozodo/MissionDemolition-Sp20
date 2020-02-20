@@ -364,6 +364,7 @@ MonoBehaviour:
   - {fileID: 8384621100078740521, guid: 3b40fb76cb5b94a46b723f0e610cd2a9, type: 3}
   - {fileID: 8384621100078740521, guid: 4741916555521894bb1d82f8db153274, type: 3}
   - {fileID: 8384621100078740521, guid: e81b41f2a30d5e54abfd5575ab11c608, type: 3}
+  - {fileID: 8384621100078740521, guid: b639e41effb510e45a2b5f94a66fa1b1, type: 3}
   level: 0
   levelMax: 0
   shotsTaken: 0
